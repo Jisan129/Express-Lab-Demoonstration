@@ -11,7 +11,7 @@ require("./config/passport")(passport);
 
 //Connect to DB
 mongoose
-  .connect(process.env.MongoURI, {
+  .connect('mongodb+srv://jisan:1234@cluster0.enylm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
