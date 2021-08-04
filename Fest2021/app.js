@@ -37,7 +37,9 @@ app.use(
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.get("/no", (req,res)=>{
+    res.render("math_olympiad/registration_oly.ejs")
+})
 //Body Parser
 app.use(express.urlencoded({ extended: false }));
 
@@ -46,5 +48,9 @@ const indexRoutes = require("./routes/index.routes");
 const userRoutes = require("./routes/users.routes");
 app.use(indexRoutes);
 app.use("/users", userRoutes);
+
+
+const olympiad=require('./routes/math.routes')
+app.use('/math',olympiad)
 
 module.exports = app;
