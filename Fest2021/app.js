@@ -1,6 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const bodyParser = require('body-parser')
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 const session = require("express-session");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
@@ -37,11 +41,8 @@ app.use(
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.get("/no", (req,res)=>{
-    res.render("math_olympiad/registration_oly.ejs")
-})
+
 //Body Parser
-app.use(express.urlencoded({ extended: false }));
 
 //Routes
 const indexRoutes = require("./routes/index.routes");
@@ -52,5 +53,12 @@ app.use("/users", userRoutes);
 
 const olympiad=require('./routes/math.routes')
 app.use('/math',olympiad)
+app.get("/no", (req,res)=>{
+    res.render("math_olympiad/registration_oly.ejs")
+})
+app.post('test',(req,res)=>{
+   res.send("test")
+})
+
 
 module.exports = app;

@@ -16,14 +16,11 @@ const olymPiadSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    category: {
+    gender: {
         type: String,
         required: true,
     },
-    medium: {
-        type: String,
-        required: true,
-    },
+
     paid: {
         type: String,
         required: true,

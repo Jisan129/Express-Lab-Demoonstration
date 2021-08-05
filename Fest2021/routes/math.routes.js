@@ -4,6 +4,5 @@ const getOlympiad = require("../controllers/olympiad.controller")
 
 
 
-router.get('/no', getOlympiad)
-
+router.post('/completeRegistration', getOlympiad)
 module.exports =router
