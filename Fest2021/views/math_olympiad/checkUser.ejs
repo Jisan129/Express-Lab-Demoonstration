@@ -47,9 +47,7 @@
                                 <td><%= user.paid %></td>
                                 <td><%= user.selected %></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" onclick="viewMathOlympiadCurrentEditUser('<%= user.id %>')" data-toggle="modal" data-target="#exampleModal">
-                                        Edit
-                                    </button>
+                                   <a href="/math/edit/<%= user.id %>">Edit</a>
                                 </td>
                                 <td>
 <!--

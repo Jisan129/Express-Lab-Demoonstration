@@ -1,6 +1,7 @@
 const  progSchema =require('../models/programming.model')
 
 const createTeam = (req, res) => {
+    req.body.total=100
     new progSchema(req.body).save().catch((err) => {
         console.error(err)
         }
@@ -39,10 +40,53 @@ const postEditUser = (req, res) => {
     progSchema.findOneAndUpdate(id,req.body,{new:true,useFindAndModify:true}).catch(err=>{
         return res.json({success:false})
     }).then((info) => {
-        return res.json({success:true})
+        res.render('programming_contest/register.ejs')
     })
 }
-module.exports={createTeam,showUser,deleteUser,submitTeam,editUser,postEditUser}
+const getPayment =(req,res)=>{
+    const id = req.params.id
+
+    progSchema.findOne({ _id: id })
+        .then((participant) => {
+            participant.paid = 100
+            participant
+                .save()
+                .then(() => {
+                    let error = 'Payment completed succesfully'
+                    req.flash('error', error)
+                    res.redirect('/progContest/showUser')
+                })
+                .catch(() => {
+                    let error = 'Data could not be updated'
+                    req.flash('error', error)
+                    res.redirect('/progContest/showUser')
+                })
+        })
+        .catch(() => {
+            let error = 'Data could not be updated'
+            req.flash('error', error)
+            res.redirect('/progContest/showUser')
+        })
+
+}
+const getSelected = (req, res) => {
+    const a=req.params.id
+    progSchema.findOne({_id:a}).then((participant) => {
+        participant.selected = true
+        participant.save()
+            .then(() => {
+                let error = 'Payment completed succesfully'
+                req.flash('error', error)
+                res.redirect('/progContest/showUser')
+            })
+            .catch(() => {
+                let error = 'Data could not be updated'
+                req.flash('error', error)
+                res.redirect('/progContest/showUser')
+            })
+    })
+}
+module.exports={createTeam,showUser,deleteUser,submitTeam,editUser,postEditUser,getPayment,getSelected}
 
 
 

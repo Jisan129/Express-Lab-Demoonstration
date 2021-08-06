@@ -9,10 +9,13 @@ const progContestSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-
-    paid: {
+    total: {
         type: Number,
         default:100
+    },
+    paid: {
+        type: Number,
+        default:0
     },
     selected: {
         type: Boolean,
