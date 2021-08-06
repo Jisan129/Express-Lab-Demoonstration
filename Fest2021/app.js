@@ -47,18 +47,18 @@ app.use(passport.session());
 //Routes
 const indexRoutes = require("./routes/index.routes");
 const userRoutes = require("./routes/users.routes");
+const progContest=require("./routes/progContest.route")
 app.use(indexRoutes);
 app.use("/users", userRoutes);
 
 
 const olympiad=require('./routes/math.routes')
 app.use('/math',olympiad)
-app.get("/no", (req,res)=>{
-    res.render("math_olympiad/registration_oly.ejs")
+app.use('/progContest',progContest)
+app.get('/show',(req,res)=>{
+    res.render('programming_contest/register.ejs')
 })
-app.post('test',(req,res)=>{
-   res.send("test")
-})
+
 
 
 module.exports = app;

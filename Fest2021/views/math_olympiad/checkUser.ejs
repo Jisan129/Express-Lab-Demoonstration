@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../admin-partials/header.ejs') %>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <!-- top navigation -->
+        <%- include('../admin-partials/sidebar.ejs') %>
+
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div id="content">
+            <div>
+
+                <div>Registered Math Olympiad Competitors</div>
+                <div class="math-olympiad-users overlaid">
+                    <table class="table" style="background-color: white">
+                        <thead>
+                        <tr class="table-primary">
+                            <th name="name" scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contact Number</th>
+                            <th name="category" scope="col">Category</th>
+                            <th scope="col">Institution</th>
+                            <th scope="col">T-Shirt</th>
+                            <th scope="col">Registration-Date</th>
+                            <th scope="col">Payment Status</th>
+                            <th scope="col">Selected</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody id="math-olympiad-tbody">
+                        <% users.forEach((user)=>{
+                        %>
+                            <tr >
+                                <td><%= user.name %></td>
+                                <td><%= user.email %></td>
+                                <td><%= user.contact %></td>
+                                <td><%= user.gender %></td>
+                                <td><%= user.institution %></td>
+                                <td><%= user.tshirt %></td>
+                                <td><%= user.date %></td>
+                                <td><%= user.paid %></td>
+                                <td><%= user.selected %></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" onclick="viewMathOlympiadCurrentEditUser('<%= user.id %>')" data-toggle="modal" data-target="#exampleModal">
+                                        Edit
+                                    </button>
+                                </td>
+                                <td>
+<!--
+                                    <button onclick="deleteMathOlympiadUser('')">Delete</button>
+-->
+                                    <a href="yes/<%= user.id %>">Delete</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+
+            </div>
+
+            <!-- Button trigger modal -->
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Math Olympiad Participant</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="math-olympiad-user-edit">
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- /page content -->
+        <!-- footer content -->
+        <%- include('../admin-partials/footer.ejs') %>
+        <!-- /footer content -->
+    </div>
+</div>
+<%- include('../admin-partials/scripts.ejs') %>
+</body>
+</html>

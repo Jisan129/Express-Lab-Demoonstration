@@ -14,7 +14,8 @@ const olymPiadSchema = new mongoose.Schema({
     },
     contact: {
         type: String,
-        required: true,
+        required: false,
+        description:"1234"
     },
     gender: {
         type: String,
