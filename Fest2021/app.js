@@ -14,8 +14,17 @@ const passport = require("passport");
 require("./config/passport")(passport);
 
 //Connect to DB
+/*mongodb+srv://jisan:1234@cluster0.enylm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority*/
+
+
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://jisan:1234@cluster0.enylm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+/*client.connect(err => {
+    // perform actions on the collection object
+});*/
 mongoose
-  .connect('mongodb+srv://jisan:1234@cluster0.enylm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+  .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

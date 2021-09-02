@@ -33,6 +33,11 @@ const olymPiadSchema = new mongoose.Schema({
     tshirt: {
         type:String,
         required:true,
+    },
+    uniqueKeys: {
+        type:String,
+        required:false,
+        default:'124343234',
     }
 })
 

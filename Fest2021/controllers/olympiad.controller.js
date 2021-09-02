@@ -1,19 +1,47 @@
 const olymPiadSchema = require('../models/olympiad.model')
+const {sendGreetingMail}=require('./email.controller')
+const {generateKey}=require('./uniqueNumber')
+const nodemailer = require("nodemailer");
+const env=require('dotenv').config()
+
+/** Sync */
+
+let state=false
 
 
 const canRegister=(req,res) => {
     res.render('math_olympiad/registration_oly.ejs')
 }
 
-const getOlympiad = (req, res) => {
-    const email = req.body.email;
-    const institute=req.body.institute;
+function checkKey(key) {
+    state=false;
+    olymPiadSchema.findOne({uniqueKeys:key}).then(function () {
+        state=true
+    })
+}
 
-    const gender = req.body.gender;
-    req.body.name = "jisan"
+
+
+const getOlympiad = (req, res) => {
+    let key=generateKey()
+    const email = req.body.email;
     req.body.paid=false;
     req.body.selected=false
+    req.body.uniqueKeys=key
     req.body.tshirt="L"
+    checkKey(key)
+    for (let i = 0; i < 10; i++) {
+        if(state===true){
+            key=generateKey()
+        }
+        else {
+            break;
+        }
+
+    }
+    sendGreetingMail(email,key,req.body.name,"Math Olympiad")
+
+
 
     new olymPiadSchema(req.body).save().catch((err) => {
         console.error(err)
@@ -40,6 +68,7 @@ const deleteUser = (req, res)=>{
     })
 
 }
+
 module.exports = {
     getContester,
     getOlympiad,

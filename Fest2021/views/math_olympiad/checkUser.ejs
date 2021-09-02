@@ -29,6 +29,7 @@
                             <th scope="col">Registration-Date</th>
                             <th scope="col">Payment Status</th>
                             <th scope="col">Selected</th>
+                            <th scope="col">Unique Key</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
@@ -46,6 +47,7 @@
                                 <td><%= user.date %></td>
                                 <td><%= user.paid %></td>
                                 <td><%= user.selected %></td>
+                                <td><%= user.uniqueKeys%></td>
                                 <td>
                                    <a href="/math/edit/<%= user.id %>">Edit</a>
                                 </td>

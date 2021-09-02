@@ -1,7 +1,36 @@
 const  progSchema =require('../models/programming.model')
+const {sendGreetingMail}=require('./email.controller')
+const{generateKey}=require('./uniqueNumber')
+let crypto = require('crypto');
+let base64url = require('base64url');
 
+/** Sync */
+let state=false
+function checkKey(key) {
+    state=false;
+    progSchema.findOne({uniqueKeys:key}).then(function () {
+        state=true
+    })
+}
 const createTeam = (req, res) => {
     req.body.total=100
+    let key=generateKey()
+
+    for (let i = 0; i < 10; i++) {
+        if(state===true){
+            key=generateKey()
+        }
+        else {
+            break;
+        }
+
+    }
+
+
+    sendGreetingMail(req.body.TLEmail,key,req.body.TLName,"Programming Contest")
+    sendGreetingMail(req.body.TM1Email,key,req.body.TM1Name,"Programming Contest")
+    sendGreetingMail(req.body.TM2Email,key,req.body.TM2Name,"Programming Contest")
+    req.body.uniqueKeys=key
     new progSchema(req.body).save().catch((err) => {
         console.error(err)
         }

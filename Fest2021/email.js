@@ -1,4 +1,5 @@
 /*
+/!*
 const nodemailer=require('nodemailer');
 const {google}=require('googleapis')
 
@@ -63,7 +64,7 @@ sendMail().then((result2) => {console.log("Ok",result2)}).catch((err) => {consol
 
 
 
-*/
+*!/
 
 const env=require('dotenv').config()
 console.log(process.env.DB_HOST)
@@ -89,3 +90,4 @@ transporter.sendMail(message, function(err, info) {
     } else {
         console.log(info);
     }})
+*/
